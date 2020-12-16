@@ -37,7 +37,7 @@ let weapons={
     smerch:50
 }
 
-let player = new Player(100,"Default User",3,"Paris",20,weapons.tank)
+let player = new Player(500,"Default User",3,"Paris",20,weapons.tank)
 let dragon = new Dragon(1000,"Ipsum",5,"Yerevan",50,weapons.smerch)
 
 
@@ -46,7 +46,7 @@ let dragonHealthbar= document.querySelector(".dragon-healthbar")
 let playerName = document.querySelector(".player-name")
 let dragonName = document.querySelector(".dragon-name")
 let dragonattackButton = document.querySelector(".dragonattack")
-
+let gameFrames=document.querySelector(".gameframes")
 
 dragonattackButton.addEventListener('click',function(){
 
@@ -63,14 +63,32 @@ playerattackButton.addEventListener('click',function(){
 setInterval(function(){
     playerHealthbar.innerHTML = `User Health: ${player.health}`
 
-},5000)
+},1000)
+
+let gameframes = setInterval(function(){
+    if(player.health <=0 ){
+        document.write("<div style='display: flex;align-items:center;height: 100%;width: 100%;justify-content: center;font-family: verdana;color:white;background-color:turquoise'><h1>Game Over Looser!:)</h1></div>")
+        clearInterval(gameframes)
+    }
+})
 
 
 setInterval(function(){
  
     dragonHealthbar.innerHTML = `Dragon Health: ${dragon.health}`
     
-},5000)
+},1000)
+
+let gameframes1 = setInterval(function(){
+    if(dragon.health <=0 ){
+        document.write("<div style='display: flex;align-items: center;height: 100%;width: 100%;justify-content: center;font-family: verdana;color:white;background-color:turquoise'><h1>You Win!!!</h1></div>")
+        clearInterval(gameframes1)
+    }
+    playerHealthbar.innerHTML = `User Health: ${player.health}`
+    dragonHealthbar.innerHTML = `Dragon Health: ${dragon.health}`
+
+},1000)
+
 
 playerName.innerHTML = player.username
 dragonName.innerHTML = dragon.name
